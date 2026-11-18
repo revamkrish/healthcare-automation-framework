@@ -22,10 +22,26 @@ ENVIRONMENTS = {
 if ENV not in ENVIRONMENTS:
     raise ValueError(f"Invalid environment: {ENV}")
 
+# UI application
 BASE_URL = ENVIRONMENTS[ENV]["base_url"]
 
-USERNAME = os.getenv("CURA_USERNAME")
-PASSWORD = os.getenv("CURA_PASSWORD")
+CURA_USERNAME = os.getenv("CURA_USERNAME")
+CURA_PASSWORD = os.getenv("CURA_PASSWORD")
 
-if not USERNAME or not PASSWORD:
+if not CURA_USERNAME or not CURA_PASSWORD:
     raise ValueError("CURA credentials are missing. Check your .env file.")
+
+# API application
+API_BASE_URL = "https://hapi.fhir.org/baseR4"
+
+
+#ENVIRONMENTS = {
+#    "dev": {
+#        "base_url": "CURA UI URL",
+#        "api_base_url": "HAPI FHIR API URL"
+#    },
+#    "qa": {
+#        "base_url": "QA UI URL",
+#        "api_base_url": "QA API URL"
+#    }
+# }

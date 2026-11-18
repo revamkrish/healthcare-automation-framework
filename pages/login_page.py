@@ -1,24 +1,31 @@
+from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 
 
-class LoginPage:
+class LoginPage(BasePage):
 
     # Locators
     USERNAME = (By.ID, "txt-username")
     PASSWORD = (By.ID, "txt-password")
     LOGIN_BUTTON = (By.ID, "btn-login")
+    MAKE_APPOINTMENT = (By.ID, "btn-make-appointment")
+
+    ERROR_MESSAGE = (By.CSS_SELECTOR, ".text-danger")
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
 
     def click_make_appointment(self):
-        self.driver.find_element(By.ID, "btn-make-appointment").click()
+        self.click(self.MAKE_APPOINTMENT)
 
     def enter_username(self, username):
-        self.driver.find_element(*self.USERNAME).send_keys(username)
+        self.enter_text(self.USERNAME, username)
 
     def enter_password(self, password):
-        self.driver.find_element(*self.PASSWORD).send_keys(password)
+        self.enter_text(self.PASSWORD, password)
 
     def click_login(self):
-        self.driver.find_element(*self.LOGIN_BUTTON).click()
+        self.click(self.LOGIN_BUTTON)
+
+    def get_error_message(self):
+        return self.get_text(self.ERROR_MESSAGE)

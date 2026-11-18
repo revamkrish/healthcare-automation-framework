@@ -18,3 +18,5 @@ screenshots/
 
 # Pytest
 .pytest_cache/
+
+.DS_Store
